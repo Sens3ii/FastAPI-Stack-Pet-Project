@@ -3,11 +3,12 @@ from datetime import date, timedelta
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
+from app import crud
 from app.crud.base import CRUDBase
 from app.models import UserAccount
-from app.schemas import UserAccountCreate, UserAccountUpdate
+from app.schemas import UserAccountCreate, UserAccountUpdate, TransactionLogCreate
 from app.utils.account import generate_card_number
-from app.utils.enums import CardKind
+from app.utils.enums import CardKind, TransactionLogKind
 
 
 class CRUDUserAccount(CRUDBase[UserAccount, UserAccountCreate, UserAccountUpdate]):
@@ -51,6 +52,19 @@ class CRUDUserAccount(CRUDBase[UserAccount, UserAccountCreate, UserAccountUpdate
 
     def withdraw_sum(self, db: Session, *, user_account: UserAccount, sum: float) -> UserAccount:
         return self.add_sum(db, user_account=user_account, sum=-sum)
+
+    def transfer_sum(
+            self, db: Session, *, user_account: UserAccount, recipient_account: UserAccount, sum: float,
+            sum_with_fee: float
+    ) -> UserAccount:
+        crud.transaction_log.create(db, obj_in=TransactionLogCreate(user_id=user_account.user_id,
+                                                                    sum=sum,
+                                                                    kind=TransactionLogKind.TRANSFER,
+                                                                    recipient_account_id=recipient_account.id,
+                                                                    ))
+        self.add_sum(db, user_account=recipient_account, sum=sum)
+        self.withdraw_sum(db, user_account=user_account, sum=sum_with_fee)
+        return user_account
 
 
 account = CRUDUserAccount(UserAccount)

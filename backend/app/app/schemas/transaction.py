@@ -10,7 +10,7 @@ class TransactionLogBase(BaseModel):
     sum: int
     user_id: int
     order_id: Optional[int] = None
-    recipient_id: Optional[int] = None
+    recipient_account_id: Optional[int] = None
     payment_id: Optional[int] = None
     kind: TransactionLogKind
 
