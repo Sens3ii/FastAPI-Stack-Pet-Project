@@ -143,7 +143,7 @@ users = [
 
 def init_db(db: Session) -> None:
     # Base.metadata.create_all(bind=engine)
-
+    return
     # creating roles
     for role in roles:
         role_obj = crud.role.get_by_codename(db, codename=role["codename"])

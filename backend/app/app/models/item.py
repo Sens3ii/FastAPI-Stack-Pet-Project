@@ -5,6 +5,12 @@ from app.db.base_class import Base
 from app.models.mixins import IsActiveMixin, TimestampMixin
 
 
+class ItemCategory(Base, TimestampMixin):
+    __tablename__ = "item_category"
+
+    title = Column(String)
+
+
 class Item(Base, IsActiveMixin, TimestampMixin):
     __tablename__ = "item"
 
@@ -16,3 +22,7 @@ class Item(Base, IsActiveMixin, TimestampMixin):
     rating = Column(Float)
     reviews = relationship("Review", back_populates="item", order_by="Review.id")
     orders = relationship("OrdersItems", back_populates="item")
+    image_url = Column(String(555))
+    bonus_percent = Column(Float, default=0.0)
+    category_id = Column(Integer, ForeignKey("item_category.id"))
+    category = relationship("ItemCategory", back_populates="items")

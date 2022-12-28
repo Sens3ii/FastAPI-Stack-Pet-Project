@@ -18,11 +18,15 @@ class User(Base, IsActiveMixin, TimestampMixin):
     gender = Column(EnumType(Gender))
     first_name = Column(String(555))
     last_name = Column(String(555))
-    full_name = column_property(concat(first_name, " ", last_name))
     birth_date = Column(Date)
+    avatar_url = Column(String(555))
+    full_name = column_property(concat(first_name, " ", last_name))
     items = relationship("Item", back_populates="owner", order_by="Item.id")
     roles = relationship("UsersRoles", back_populates="user", order_by="UsersRoles.role_id")
     orders = relationship("Order", back_populates="user", order_by="Order.id")
+    transaction_logs = relationship("TransactionLog", back_populates="user", order_by="TransactionLog.id")
+    deposit = relationship("UserDeposit", back_populates="user", uselist=False)
+    account = relationship("UserAccount", back_populates="user", uselist=False)
 
 
 class Role(Base):
