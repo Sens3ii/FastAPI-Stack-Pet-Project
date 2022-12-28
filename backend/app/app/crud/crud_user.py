@@ -22,6 +22,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             gender=obj_in.gender,
             birth_date=obj_in.birth_date,
             hashed_password=get_password_hash(obj_in.password),
+            avatar_url=obj_in.avatar_url,
         )
         db.add(db_obj)
         db.commit()
@@ -29,6 +30,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         crud.role.delete_roles_by_user_id(db=db, user_id=db_obj.id)
         role = crud.role.get_by_codename(db=db, codename=obj_in.role_code)
         crud.role.add_user(db=db, role_id=role.id, user_id=db_obj.id)
+        # TODO: add account and deposit creation
         return db_obj
 
     def update(

@@ -12,7 +12,7 @@ items = [
     {
         "title": "Item 1",
         "description": "This is the first item in the list",
-        "price": 10
+        "price": 10,
     },
     {
         "title": "Item 2",
@@ -77,6 +77,7 @@ users = [
         "birth_date": "2001-10-23",
         "password": settings.FIRST_SUPERUSER_PASSWORD,
         "role_code": 'admin',
+        "avatar_url":  "https://i.imgur.com/BN1WW4d_d.webp?maxwidth=520&shape=thumb&fidelity=high"
     },
     {
         "email": "seller@jusan.com",
@@ -87,6 +88,7 @@ users = [
         "birth_date": "1991-02-01",
         "password": "seller",
         "role_code": 'seller',
+        "avatar_url": "https://phonoteka.org/uploads/posts/2021-07/1625636249_8-phonoteka-org-p-sidorovich-art-krasivo-8.jpg"
     },
     {
         "email": "client@jusan.com",
@@ -97,47 +99,19 @@ users = [
         "birth_date": "1995-06-01",
         "password": "client",
         "role_code": 'client',
+        "avatar_url": "https://footballhd.kz/uploads/posts/2022-12/1671630976_mbappe.jpg"
     },
     {
-        "email": "user7@example.com",
-        "phone": "123-456-7896",
-        "first_name": "Emily",
-        "last_name": "Johnson",
-        "gender": "WOMAN",
-        "birth_date": "1996-07-01",
-        "password": "password7",
-        "role_code": 'client',
-    },
-    {
-        "email": "user8@example.com",
-        "phone": "123-456-7897",
-        "first_name": "David",
-        "last_name": "Williams",
+        "email": "client2@jusan.com",
+        "phone": "123-456-7895",
+        "first_name": "James",
+        "last_name": "Smith",
         "gender": "MAN",
-        "birth_date": "1997-08-01",
-        "password": "password8",
+        "birth_date": "1995-06-01",
+        "password": "client2",
         "role_code": 'client',
+        "avatar_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg/250px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg"
     },
-    {
-        "email": "user9@example.com",
-        "phone": "123-456-7898",
-        "first_name": "Jessica",
-        "last_name": "Jones",
-        "gender": "WOMAN",
-        "birth_date": "1998-09-01",
-        "password": "password9",
-        "role_code": 'client',
-    },
-    {
-        "email": "user10@example.com",
-        "phone": "123-456-7899",
-        "first_name": "Michael",
-        "last_name": "Brown",
-        "gender": "MAN",
-        "birth_date": "1999-10-01",
-        "password": "password10",
-        "role_code": 'client',
-    }
 ]
 
 
