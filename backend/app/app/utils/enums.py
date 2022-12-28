@@ -16,3 +16,8 @@ class TransactionLogKind(str, Enum):
     TRANSFER = "TRANSFER"
     PURCHASE = "PURCHASE"
     PAYMENT = "PAYMENT"
+
+
+class OrderType(str, Enum):
+    ASC = "asc"
+    DESC = "desc"
