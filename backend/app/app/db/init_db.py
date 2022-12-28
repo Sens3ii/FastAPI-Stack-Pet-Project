@@ -77,7 +77,7 @@ users = [
         "birth_date": "2001-10-23",
         "password": settings.FIRST_SUPERUSER_PASSWORD,
         "role_code": 'admin',
-        "avatar_url":  "https://i.imgur.com/BN1WW4d_d.webp?maxwidth=520&shape=thumb&fidelity=high"
+        "avatar_url": "https://i.imgur.com/BN1WW4d_d.webp?maxwidth=520&shape=thumb&fidelity=high"
     },
     {
         "email": "seller@jusan.com",
@@ -114,6 +114,18 @@ users = [
     },
 ]
 
+item_category = [
+    {
+        'title': "Электроника",
+    },
+    {
+        'title': "Мебель",
+    },
+    {
+        'title': "Книги",
+    },
+]
+
 
 def init_db(db: Session) -> None:
     # Base.metadata.create_all(bind=engine)
@@ -132,3 +144,8 @@ def init_db(db: Session) -> None:
         if user["role_code"] in ['admin', 'seller']:
             for item in items:
                 crud.item.create_with_owner(db, obj_in=schemas.ItemCreate(**item), owner_id=user_obj.id)
+
+    for category in item_category:
+        category_obj = crud.item_category.get_by_title(db, title=category["title"])
+        if not category_obj:
+            crud.item_category.create(db, obj_in=schemas.ItemCategoryCreate(**category))

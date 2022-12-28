@@ -2,7 +2,7 @@ from .account import UserAccountCreate, UserAccountUpdate, UserAccountResponse, 
     UserAccountSumRequest, UserAccountTransferRequest
 from .auth import RoleCreate, RoleUpdate, RoleResponse
 from .deposit import UserDepositCreate, UserDepositUpdate, UserDepositResponse, UserDepositSumRequest
-from .item import ItemResponse, ItemCreate, ItemUpdate
+from .item import ItemResponse, ItemCreate, ItemUpdate, ItemCategoryCreate, ItemCategoryUpdate, ItemCategoryResponse
 from .msg import Msg
 from .order import OrderCreate, OrderUpdate, OrderResponse
 from .review import ReviewCreate, ReviewUpdate, ReviewResponse

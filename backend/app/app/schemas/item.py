@@ -35,3 +35,22 @@ class ItemResponse(ItemBase):
 
     class Config:
         orm_mode = True
+
+
+class ItemCategoryBase(BaseModel):
+    title: str
+
+
+class ItemCategoryCreate(ItemCategoryBase):
+    pass
+
+
+class ItemCategoryUpdate(ItemCategoryBase):
+    pass
+
+
+class ItemCategoryResponse(ItemCategoryBase):
+    id: int
+
+    class Config:
+        orm_mode = True

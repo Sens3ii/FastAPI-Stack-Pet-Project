@@ -6,6 +6,7 @@ from .crud_review import review
 from .crud_role import role
 from .crud_transaction import transaction_log
 from .crud_user import user
+from .crud_item_category import item_category
 # For a new basic set of CRUD operations you could just do
 
 # from .base import CRUDBase
