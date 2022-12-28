@@ -1,2 +1,6 @@
 __pycache__
 app.egg-info
+idea
+.idea
+app/.idea
+app/.venv
