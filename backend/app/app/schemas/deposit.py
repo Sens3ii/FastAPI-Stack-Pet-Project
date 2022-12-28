@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from app.schemas.user import UserNested
 
@@ -21,3 +21,7 @@ class UserDepositResponse(UserDepositBase):
 
     class Config:
         orm_mode = True
+
+
+class UserDepositSumRequest(BaseModel):
+    sum: float = Field(..., gt=0)

@@ -89,7 +89,7 @@ def transfer(
         transfer_in: UserAccountTransferRequest
 ) -> Any:
     """
-    Add sum to account
+    Transfer money
     """
 
     account = crud.account.get_by_user_id(db, user_id=current_user.id)
