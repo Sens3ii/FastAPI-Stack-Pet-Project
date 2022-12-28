@@ -47,6 +47,15 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             update_data["hashed_password"] = hashed_password
         return super().update(db, db_obj=db_obj, obj_in=update_data)
 
+    @staticmethod
+    def update_password(db: Session, *, db_obj: User, password: str) -> User:
+        hashed_password = get_password_hash(password)
+        db_obj.hashed_password = hashed_password
+        db.add(db_obj)
+        db.commit()
+        db.refresh(db_obj)
+        return db_obj
+
     def authenticate(self, db: Session, *, email: str, password: str) -> Optional[User]:
         user = self.get_by_email(db, email=email)
         if not user:
@@ -64,7 +73,6 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         role_id = crud.role.get_by_codename(db, codename="seller").id
         query = db.query(UsersRoles).filter(UsersRoles.user_id == user.id, UsersRoles.role_id == role_id).first()
         return bool(query)
-
 
 
 user = CRUDUser(User)

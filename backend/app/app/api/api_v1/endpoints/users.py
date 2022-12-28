@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
@@ -55,6 +55,20 @@ def update_user_me(
     Update own user.
     """
     user = crud.user.update(db, db_obj=current_user, obj_in=user_in)
+    return user
+
+
+@router.patch("/me/password/", response_model=schemas.UserResponse)
+def update_user_me_password(
+        *,
+        db: Session = Depends(deps.get_db),
+        user_in: schemas.UserPasswordUpdate,
+        current_user: models.User = Depends(deps.get_current_user),
+) -> Any:
+    """
+    Update own user.
+    """
+    user = crud.user.update_password(db, db_obj=current_user, password=user_in.password)
     return user
 
 
