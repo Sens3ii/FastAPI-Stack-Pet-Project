@@ -7,7 +7,7 @@ from .msg import Msg
 from .order import OrderCreate, OrderUpdate, OrderResponse, OrderRequest, OrderItemCreate
 from .payment import PaymentCategoryCreate, PaymentCategoryUpdate, PaymentCategoryResponse, PaymentCreate, \
     PaymentUpdate, \
-    PaymentResponse
+    PaymentResponse, PaymentPayRequest
 from .review import ReviewCreate, ReviewUpdate, ReviewResponse
 from .token import Token, TokenPayload
 from .transaction import TransactionLogCreate, TransactionLogUpdate, TransactionLogResponse

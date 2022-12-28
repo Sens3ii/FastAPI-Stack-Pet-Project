@@ -38,3 +38,8 @@ class PaymentResponse(PaymentBase):
 
     class Config:
         orm_mode = True
+
+
+class PaymentPayRequest(BaseModel):
+    payment_id: int
+    sum: int
