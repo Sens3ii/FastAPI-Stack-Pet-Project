@@ -9,6 +9,7 @@ class ItemCategory(Base, TimestampMixin):
     __tablename__ = "item_category"
 
     title = Column(String)
+    items = relationship("Item", back_populates="category")
 
 
 class Item(Base, IsActiveMixin, TimestampMixin):

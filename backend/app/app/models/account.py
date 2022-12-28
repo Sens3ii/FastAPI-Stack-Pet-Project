@@ -17,3 +17,4 @@ class UserAccount(Base, TimestampMixin):
     card_number = Column(String(16), nullable=False)
     kind = Column(EnumType(CardKind), nullable=False, default=CardKind.JUSAN)
     expiration_date = Column(Date, nullable=False)
+    transaction_logs = relationship("TransactionLog", back_populates="recipient_account", order_by="TransactionLog.id")

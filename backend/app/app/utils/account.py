@@ -22,10 +22,12 @@ def calculate_luhn(partial_card_number):
 
 def generate_card_number(prefix):
     # Generate the rest of the card number as random digits
-    rest = "".join([str(random.randint(0, 9)) for _ in range(9)])
+    rest = "".join([str(random.randint(0, 9)) for _ in range(11)])
 
     # Calculate the check digit
     check_digit = calculate_luhn(prefix + rest)
 
     # Return the card number as a string
+    print("!"*100)
+    print(prefix + rest + str(check_digit))
     return prefix + rest + str(check_digit)

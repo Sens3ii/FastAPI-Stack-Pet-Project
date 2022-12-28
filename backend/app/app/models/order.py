@@ -13,6 +13,7 @@ class Order(Base, TimestampMixin):
     user = relationship("User", back_populates="orders")
     sum = Column(Integer)
     items = relationship("OrdersItems", back_populates="order", order_by="OrdersItems.item_id")
+    transaction_log = relationship("TransactionLog", back_populates="order", uselist=False)
 
 
 class OrdersItems(Base):

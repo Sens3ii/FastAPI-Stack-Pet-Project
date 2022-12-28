@@ -8,7 +8,7 @@ from app.schemas import UserDepositCreate, UserDepositUpdate
 class CRUDUserDeposit(CRUDBase[UserDeposit, UserDepositCreate, UserDepositUpdate]):
 
     def generate_user_deposit(self, db: Session, *, user_id: int):
-        db_obj = self.model(user_id=user_id, amount=0)
+        db_obj = self.model(user_id=user_id, sum=0)
         db.add(db_obj)
         db.commit()
         db.refresh(db_obj)
