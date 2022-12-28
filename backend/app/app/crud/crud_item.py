@@ -4,6 +4,7 @@ from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
+from app.models import OrdersItems
 from app.models.item import Item
 from app.schemas.item import ItemCreate, ItemUpdate
 
@@ -55,6 +56,12 @@ class CRUDItem(CRUDBase[Item, ItemCreate, ItemUpdate]):
             query = query.filter(self.model.owner_id == owner_id)
         query = query.offset(skip).limit(limit)
         return query.all()
+
+    @staticmethod
+    def is_purchased(self, db: Session, *, item_id: int, user_id: int) -> bool:
+        if db.query(OrdersItems).filter(OrdersItems.item_id == item_id, OrdersItems.user_id == user_id).first():
+            return True
+        return False
 
 
 item = CRUDItem(Item)

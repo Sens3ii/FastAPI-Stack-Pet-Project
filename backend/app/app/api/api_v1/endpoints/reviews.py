@@ -1,6 +1,6 @@
 from typing import Any
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app import crud, models, schemas
@@ -19,5 +19,9 @@ def create_review(
     """
     Create new review.
     """
+    if not crud.item.is_purchased(db=db, item_id=review_in.item_id, user_id=current_user.id):
+        raise HTTPException(status_code=400, detail="You can't review item that you have not purchased")
+    if crud.review.is_reviewed(db=db, item_id=review_in.item_id, user_id=current_user.id):
+        raise HTTPException(status_code=400, detail="You have already reviewed this item")
     review = crud.review.create_with_owner(db=db, obj_in=review_in, user_id=current_user.id)
     return review
