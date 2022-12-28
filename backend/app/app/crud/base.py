@@ -75,7 +75,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         return paginate(self.get_multi_query(db))
 
     @staticmethod
-    def get_paginated(self, query: Query) -> AbstractPage:
+    def get_paginated(query: Query) -> AbstractPage:
         return paginate(query)
 
     def create(self, db: Session, *, obj_in: CreateSchemaType) -> ModelType:

@@ -1,6 +1,7 @@
 from fastapi import APIRouter
+from fastapi_pagination import add_pagination
 
-from app.api.api_v1.endpoints import items, login, users, utils, reviews, order, account, deposit
+from app.api.api_v1.endpoints import items, login, users, utils, reviews, order, account, deposit, transaction
 
 api_router = APIRouter()
 api_router.include_router(login.router, tags=["login"])
@@ -11,3 +12,6 @@ api_router.include_router(reviews.router, prefix="/reviews", tags=["reviews"])
 api_router.include_router(order.router, prefix="/orders", tags=["orders"])
 api_router.include_router(account.router, prefix="/accounts", tags=["accounts"])
 api_router.include_router(deposit.router, prefix="/deposits", tags=["deposits"])
+api_router.include_router(transaction.router, prefix="/transactions", tags=["transactions"])
+
+add_pagination(api_router)
