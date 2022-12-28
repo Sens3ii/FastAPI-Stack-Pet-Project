@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Union
+from typing import Optional
 
 from sqlalchemy.orm import Session
 
@@ -33,19 +33,6 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         crud.account.generate_user_account(db=db, user_id=db_obj.id)
         crud.deposit.generate_user_deposit(db=db, user_id=db_obj.id)
         return db_obj
-
-    def update(
-            self, db: Session, *, db_obj: User, obj_in: Union[UserUpdate, Dict[str, Any]]
-    ) -> User:
-        if isinstance(obj_in, dict):
-            update_data = obj_in
-        else:
-            update_data = obj_in.dict(exclude_unset=True)
-        if update_data["password"]:
-            hashed_password = get_password_hash(update_data["password"])
-            del update_data["password"]
-            update_data["hashed_password"] = hashed_password
-        return super().update(db, db_obj=db_obj, obj_in=update_data)
 
     @staticmethod
     def update_password(db: Session, *, db_obj: User, password: str) -> User:

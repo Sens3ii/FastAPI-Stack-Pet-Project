@@ -74,6 +74,57 @@ item_category = [
     },
 ]
 
+payment_category = [
+    {
+        'title': "Ads sites",
+    },
+    {
+        'title': "Mobile connection",
+    },
+    {
+        'title': "Bookmakers",
+    },
+]
+
+payments = [
+    {
+        'title': "OLX",
+        'category_type': "Ads sites",
+    },
+    {
+        'title': "Kolesa",
+        'category_type': "Ads sites",
+    },
+    {
+        'title': "Krisha",
+        'category_type': "Ads sites",
+    },
+    {
+        'title': "1Fit",
+        'category_type': "Bookmakers",
+    },
+    {
+        'title': "1xbet",
+        'category_type': "Bookmakers",
+    },
+    {
+        'title': "PariMatch",
+        'category_type': "Bookmakers",
+    },
+    {
+        'title': "Beeline",
+        'category_type': "Mobile connection",
+    },
+    {
+        'title': "Active/Kcell",
+        'category_type': "Mobile connection",
+    },
+    {
+        'title': "Tele2",
+        'category_type': "Mobile connection",
+    },
+]
+
 items = [
     {
         "title": "iPhone 12",
@@ -158,7 +209,78 @@ items = [
         "price": 17000,
         "image_url": "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg",
         "category_type": "Electronics"
-    }
+    },
+    {
+        "title": "How Far the Light Reaches: A Life in Ten Sea Creatures",
+        "description": "Sabrina Imbler",
+        "price": 30,
+        "image_url": "https://images-us.bookshop.org/ingram/9780316540537.jpg?height=500&v=v2-d7128781895581d128a991039b3ed97c",
+        "category_type": "Books"
+    },
+
+    {
+        "title": "The January 6th Report",
+        "description": "Celadon Books and The New Yorker present the report by the Select Committee to Investigate the Jan 6 Attack on the United States Capitol.",
+        "price": 27,
+        "image_url": "https://images-us.bookshop.org/ingram/9781250877529.jpg?height=500&v=v2-711ab7f6188e10e9d4a0a328811811a6",
+        "category_type": "Books"
+    },
+
+    {
+        "title": "The Bequest: A Dark Academia Thriller",
+        "description": "The Bequest: A Dark Academia Thriller",
+        "price": 40,
+        "image_url": "https://images-us.bookshop.org/ingram/9781613163443.jpg?height=500&v=v2-2d6e5663244b0afc2fc77d2c72575069",
+        "category_type": "Books"
+    },
+
+    {
+        "title": "The Light We Carry: Overcoming in Uncertain Times",
+        "description": "The Light We Carry: Overcoming in Uncertain Times",
+        "price": 50,
+        "image_url": "https://images-us.bookshop.org/ingram/9780593237465.jpg?height=500&v=v2-f56e0f3e94dd8bc08850b6cd43693503",
+        "category_type": "Books"
+    },
+
+    {
+        "title": "Demon Copperhead",
+        "description": "An Oprah's Book Club Selection - An Instant New York Times Bestseller",
+        "price": 31,
+        "image_url": "https://images-us.bookshop.org/ingram/9780063251922.jpg?height=500&v=v2-2a0401d1fca1ac218ec13add00000000",
+        "category_type": "Books"
+    },
+
+    {
+        "title": "Braiding Sweetgrass",
+        "description": "Named a Best Essay Collection of the Decade by Literary Hub",
+        "price": 38,
+        "image_url": "Named a Best Essay Collection of the Decade by Literary Hub",
+        "category_type": "Books"
+    },
+
+    {
+        "title": "Tomorrow, and Tomorrow, and Tomorrow",
+        "description": "NEW YORK TIMES BEST SELLER",
+        "price": 45,
+        "image_url": "https://images-us.bookshop.org/ingram/9780593321201.jpg?height=500&v=v2-3559920d7919523c7314f5f676233858",
+        "category_type": "Books"
+    },
+
+    {
+        "title": "A Heart That Works",
+        "description": "People Fall Must Read pick * 2022 BuzzFeed Fall Reading pick * Time 100 Must-Read Books of 2022A visceral",
+        "price": 39,
+        "image_url": "https://images-us.bookshop.org/ingram/9781954118317.jpg?height=500&v=v2-0c7b5e7919bc61a78291741b5426a3af",
+        "category_type": "Books"
+    },
+
+    {
+        "title": "Babel: Or the Necessity of Violence",
+        "description": "An Arcane History of the Oxford Translators' Revolution",
+        "price": 50,
+        "image_url": "https://images-us.bookshop.org/ingram/9780063021426.jpg?height=500&v=v2-3103f4fe0d9c610a2b71dadd00000000",
+        "category_type": "Books"
+    },
 ]
 
 
@@ -190,3 +312,16 @@ def init_db(db: Session) -> None:
             item["category_id"] = category_id
             item["owner_id"] = seller_id
             crud.item.create(db, obj_in=schemas.ItemCreate(**item))
+
+    for category in payment_category:
+        category_obj = crud.payment_category.get_by_title(db, title=category["title"])
+        if not category_obj:
+            crud.payment_category.create(db, obj_in=schemas.PaymentCategoryCreate(**category))
+
+    for payment in payments:
+        payment_obj = crud.payment.get_by_title(db, title=payment["title"])
+        if not payment_obj:
+            category_id = crud.payment_category.get_by_title(db, title=payment["category_type"]).id
+            del payment["category_type"]
+            payment["category_id"] = category_id
+            crud.payment.create(db, obj_in=schemas.PaymentCreate(**payment))
