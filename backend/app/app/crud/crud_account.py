@@ -35,6 +35,13 @@ class CRUDUserAccount(CRUDBase[UserAccount, UserAccountCreate, UserAccountUpdate
             .first()
         )
 
+    def get_by_card_number(self, db: Session, *, card_number: str) -> UserAccount:
+        return (
+            db.query(self.model)
+            .filter(UserAccount.card_number == card_number)
+            .first()
+        )
+
     @staticmethod
     def add_sum(self, db: Session, *, user_account: UserAccount, sum: float) -> UserAccount:
         user_account.sum += sum

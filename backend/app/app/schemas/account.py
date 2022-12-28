@@ -27,3 +27,6 @@ class UserAccountResponse(UserAccountBase):
     created_at: datetime
     updated_at: datetime
     user: UserNested
+
+    class Config:
+        orm_mode = True
