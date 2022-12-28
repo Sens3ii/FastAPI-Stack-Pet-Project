@@ -4,7 +4,7 @@ from .auth import RoleCreate, RoleUpdate, RoleResponse
 from .deposit import UserDepositCreate, UserDepositUpdate, UserDepositResponse, UserDepositSumRequest
 from .item import ItemResponse, ItemCreate, ItemUpdate, ItemCategoryCreate, ItemCategoryUpdate, ItemCategoryResponse
 from .msg import Msg
-from .order import OrderCreate, OrderUpdate, OrderResponse
+from .order import OrderCreate, OrderUpdate, OrderResponse, OrderRequest, OrderItemCreate
 from .review import ReviewCreate, ReviewUpdate, ReviewResponse
 from .token import Token, TokenPayload
 from .transaction import TransactionLogCreate, TransactionLogUpdate, TransactionLogResponse

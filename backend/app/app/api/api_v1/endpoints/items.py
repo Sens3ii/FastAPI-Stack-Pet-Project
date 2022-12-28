@@ -110,7 +110,7 @@ def read_item_reviews(
         current_user: models.User = Depends(deps.get_current_user),
 ) -> Any:
     """
-    Get item by ID.
+    Get reviews of an item.
     """
     item = crud.item.get(db=db, id=id)
     if not item:

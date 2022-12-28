@@ -29,3 +29,4 @@ class OrdersItems(Base):
 
     item_title = association_proxy(target_collection="item", attr="title")
     item_price = association_proxy(target_collection="item", attr="price")
+    order_user_id = association_proxy(target_collection="order", attr="user_id")

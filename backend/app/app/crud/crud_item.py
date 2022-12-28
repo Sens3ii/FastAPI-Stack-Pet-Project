@@ -45,8 +45,8 @@ class CRUDItem(CRUDBase[Item, ItemCreate, ItemUpdate]):
         return db_obj
 
     @staticmethod
-    def is_purchased(self, db: Session, *, item_id: int, user_id: int) -> bool:
-        if db.query(OrdersItems).filter(OrdersItems.item_id == item_id, OrdersItems.user_id == user_id).first():
+    def is_purchased(db: Session, *, item_id: int, user_id: int) -> bool:
+        if db.query(OrdersItems).filter(OrdersItems.item_id == item_id, OrdersItems.order_user_id == user_id).first():
             return True
         return False
 

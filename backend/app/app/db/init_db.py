@@ -95,6 +95,69 @@ items = [
         "price": 1000,
         "image_url": "https://cdn.f.kz/prod/479/478181_1000.jpg",
         "category_type": "Books",
+    },
+    {
+        "title": "WD 2TB Elements Portable External Hard Drive - USB 3.0 ",
+        "description": "WD 2TB Elements Portable ",
+        "price": 10000,
+        "image_url": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
+        "category_type": "Electronics"
+    },
+    {
+        "title": "Canon EOS 70D Digital SLR Camera",
+        "description": "Canon EOS 70D",
+        "price": 230000,
+        "image_url": "https://m.media-amazon.com/images/I/81U00AkAUWL._AC_SL1500_.jpg",
+        "category_type": "Electronics"
+    },
+    {
+        "title": "Lenovo 2022 Ideapad 3 Laptop, 15.6",
+        "description": "Lenovo 2022 Ideapad",
+        "price": 120000,
+        "image_url": "https://m.media-amazon.com/images/I/61QGMX0Qy6L._AC_SL1352_.jpg",
+        "category_type": "Electronics"
+    },
+    {
+        "title": "Acer 2022 15inch HD IPS Chromebook",
+        "description": "Acer 2022 15inch",
+        "price": 170000,
+        "image_url": "https://m.media-amazon.com/images/I/71-QYvMpwGL._AC_SL1498_.jpg",
+        "category_type": "Electronics"
+    },
+    {
+        "title": "Acer Aspire 5 A515-56-32DK Slim Laptop - 15.6",
+        "description": "Acer Aspire 5 A515-56-32DK",
+        "price": 210000,
+        "image_url": "https://m.media-amazon.com/images/I/71pvhTrmZDL._AC_SL1500_.jpg",
+        "category_type": "Electronics"
+    },
+    {
+        "title": "LG C2 77-inch evo OLED TV",
+        "description": "LG C2 77-inch evo OLED TV",
+        "price": 380000,
+        "image_url": "https://www.lg.com/us/images/tvs/md08001966/gallery/DZ_01.jpg",
+        "category_type": "Electronics"
+    },
+    {
+        "title": "LG B1 77 inch Class 4K Smart OLED TV w/AI ThinQ",
+        "description": "LG B1 77",
+        "price": 410000,
+        "image_url": "https://www.lg.com/us/images/tvs/md07521464/gallery/Z-01.jpg",
+        "category_type": "Electronics"
+    },
+    {
+        "title": "45'' UltraGear™ OLED Curved Gaming Monitor WQHD with 240Hz Refresh Rate",
+        "description": "45'' UltraGear™ OLED Curved Gaming Monitor ",
+        "price": 200000,
+        "image_url": "https://www.lg.com/us/images/monitors/md08003490/gallery/DZ-1_v1.jpg",
+        "category_type": "Electronics"
+    },
+    {
+        "title": "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive",
+        "description": "WD 4TB Gaming Drive Works",
+        "price": 17000,
+        "image_url": "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg",
+        "category_type": "Electronics"
     }
 ]
 
