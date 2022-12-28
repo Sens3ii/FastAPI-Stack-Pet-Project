@@ -93,8 +93,8 @@ users = [
     {
         "email": "client@jusan.com",
         "phone": "123-456-7895",
-        "first_name": "James",
-        "last_name": "Smith",
+        "first_name": "MBAPPE",
+        "last_name": "MBAPPE",
         "gender": "MAN",
         "birth_date": "1995-06-01",
         "password": "client",
@@ -104,8 +104,8 @@ users = [
     {
         "email": "client2@jusan.com",
         "phone": "123-456-7895",
-        "first_name": "James",
-        "last_name": "Smith",
+        "first_name": "MESSI",
+        "last_name": "MESSI",
         "gender": "MAN",
         "birth_date": "1995-06-01",
         "password": "client2",
@@ -127,7 +127,7 @@ def init_db(db: Session) -> None:
     for user in users:
         user_obj = crud.user.get_by_email(db, email=user["email"])
         if not user_obj:
-            crud.user.create(db, obj_in=schemas.UserCreate(**user))
+            user_obj = crud.user.create(db, obj_in=schemas.UserCreate(**user))
         # Create items
         if user["role_code"] in ['admin', 'seller']:
             for item in items:

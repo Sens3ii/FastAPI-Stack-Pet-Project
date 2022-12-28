@@ -30,3 +30,12 @@ class UserAccountResponse(UserAccountBase):
 
     class Config:
         orm_mode = True
+
+
+class UserAccountCheckResponse(BaseModel):
+    id: int
+    card_number: PaymentCardNumber
+    kind: CardKind
+
+    class Config:
+        orm_mode = True

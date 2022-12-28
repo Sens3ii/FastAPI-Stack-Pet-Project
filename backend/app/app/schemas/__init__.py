@@ -1,4 +1,4 @@
-from .account import UserAccountCreate, UserAccountUpdate, UserAccountResponse
+from .account import UserAccountCreate, UserAccountUpdate, UserAccountResponse, UserAccountCheckResponse
 from .auth import RoleCreate, RoleUpdate, RoleResponse
 from .deposit import UserDepositCreate, UserDepositUpdate, UserDepositResponse
 from .item import ItemResponse, ItemCreate, ItemUpdate
