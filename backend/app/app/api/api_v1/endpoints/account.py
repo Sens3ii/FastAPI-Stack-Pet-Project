@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from app import models, crud
 from app.api import deps
-from app.schemas import UserAccountCheckResponse
+from app.schemas import UserAccountCheckResponse, UserAccountResponse
 
 router = APIRouter()
 
@@ -26,4 +26,18 @@ def read_items(
         raise HTTPException(status_code=400, detail="Card number not found")
     if current_user.id == account.user_id:
         raise HTTPException(status_code=400, detail="You can't transfer money to yourself")
+    return account
+
+
+@router.get("/my/", response_model=UserAccountResponse)
+def read_items(
+        db: Session = Depends(deps.get_db),
+        current_user: models.User = Depends(deps.get_current_user),
+) -> Any:
+    """
+    Get my account
+    """
+    account = crud.account.get_by_user_id(db, user_id=current_user.id)
+    if account is None:
+        raise HTTPException(status_code=404, detail="Card number not found")
     return account
