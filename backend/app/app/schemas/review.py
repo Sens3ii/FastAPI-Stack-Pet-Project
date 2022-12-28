@@ -1,5 +1,7 @@
 from pydantic import BaseModel, validator
 
+from app.schemas.user import UserNested
+
 
 class ReviewBase(BaseModel):
     comment: str
@@ -26,14 +28,6 @@ class ReviewUpdate(ReviewBase):
 
 
 class ReviewResponse(ReviewBase):
-    class UserNested(BaseModel):
-        id: int
-        email: str
-        full_name: str
-
-        class Config:
-            orm_mode = True
-
     id: int
     user: UserNested
 

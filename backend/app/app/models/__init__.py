@@ -5,4 +5,3 @@ from .review import Review
 from .account import UserAccount
 from .transaction import TransactionLog
 from .payment import Payment, PaymentCategory
-

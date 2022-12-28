@@ -35,3 +35,13 @@ class UserResponse(UserBase):
 
     class Config:
         orm_mode = True
+
+
+class UserNested(BaseModel):
+    id: int
+    email: str
+    full_name: str
+    avatar_url: Optional[str] = None
+
+    class Config:
+        orm_mode = True
