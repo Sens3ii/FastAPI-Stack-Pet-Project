@@ -41,5 +41,5 @@ class UserAccountCheckResponse(BaseModel):
         orm_mode = True
 
 
-class UserAccountAddSumRequest(BaseModel):
+class UserAccountSumRequest(BaseModel):
     sum: float

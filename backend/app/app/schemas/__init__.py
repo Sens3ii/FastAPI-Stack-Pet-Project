@@ -1,5 +1,5 @@
 from .account import UserAccountCreate, UserAccountUpdate, UserAccountResponse, UserAccountCheckResponse, \
-    UserAccountAddSumRequest
+    UserAccountSumRequest
 from .auth import RoleCreate, RoleUpdate, RoleResponse
 from .deposit import UserDepositCreate, UserDepositUpdate, UserDepositResponse
 from .item import ItemResponse, ItemCreate, ItemUpdate
