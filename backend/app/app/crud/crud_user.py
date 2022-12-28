@@ -66,4 +66,5 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         return bool(query)
 
 
+
 user = CRUDUser(User)

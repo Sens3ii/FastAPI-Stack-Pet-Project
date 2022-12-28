@@ -50,6 +50,13 @@ class CRUDUserAccount(CRUDBase[UserAccount, UserAccountCreate, UserAccountUpdate
         db.refresh(user_account)
         return user_account
 
+    def add_bonuses(self, db: Session, *, user_account: UserAccount, sum: float) -> UserAccount:
+        user_account.bonuses += sum
+        db.add(user_account)
+        db.commit()
+        db.refresh(user_account)
+        return user_account
+
     def withdraw_sum(self, db: Session, *, user_account: UserAccount, sum: float) -> UserAccount:
         return self.add_sum(db, user_account=user_account, sum=-sum)
 
