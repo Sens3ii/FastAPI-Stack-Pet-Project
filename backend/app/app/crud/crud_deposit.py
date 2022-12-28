@@ -6,6 +6,14 @@ from app.schemas import UserDepositCreate, UserDepositUpdate
 
 
 class CRUDUserDeposit(CRUDBase[UserDeposit, UserDepositCreate, UserDepositUpdate]):
+
+    def generate_user_deposit(self, db: Session, *, user_id: int):
+        db_obj = self.model(user_id=user_id, amount=0)
+        db.add(db_obj)
+        db.commit()
+        db.refresh(db_obj)
+        return db_obj
+
     def get_by_user_id(self, db: Session, *, user_id: int) -> UserDeposit:
         return db.query(self).filter(UserDeposit.user_id == user_id).first()
 
@@ -15,3 +23,6 @@ class CRUDUserDeposit(CRUDBase[UserDeposit, UserDepositCreate, UserDepositUpdate
         db.commit()
         db.refresh(user_deposit)
         return user_deposit
+
+
+deposit = CRUDUserDeposit(UserDeposit)

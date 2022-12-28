@@ -38,7 +38,7 @@ def read_orders(
     return orders
 
 
-@router.get("/my", response_model=list[schemas.OrderResponse])
+@router.get("/my/", response_model=list[schemas.OrderResponse])
 def read_my_orders(
         *,
         db: Session = Depends(deps.get_db),

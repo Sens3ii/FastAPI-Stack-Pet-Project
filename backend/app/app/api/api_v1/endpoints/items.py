@@ -28,7 +28,7 @@ def read_items(
     return items
 
 
-@router.get("/my", response_model=List[schemas.ItemResponse])
+# @router.get("/my/", response_model=List[schemas.ItemResponse])
 def read_items_by_user(
         db: Session = Depends(deps.get_db),
         skip: int = 0,
@@ -47,7 +47,7 @@ def read_items_by_user(
     return items
 
 
-@router.post("/", response_model=schemas.ItemResponse)
+# @router.post("/", response_model=schemas.ItemResponse)
 def create_item(
         *,
         db: Session = Depends(deps.get_db),
@@ -64,7 +64,7 @@ def create_item(
     return item
 
 
-@router.put("/{id}", response_model=schemas.ItemResponse)
+# @router.put("/{id}/", response_model=schemas.ItemResponse)
 def update_item(
         *,
         db: Session = Depends(deps.get_db),
@@ -86,7 +86,7 @@ def update_item(
     return item
 
 
-@router.get("/{id}", response_model=schemas.ItemResponse)
+@router.get("/{id}/", response_model=schemas.ItemResponse)
 def read_item(
         *,
         db: Session = Depends(deps.get_db),
@@ -102,7 +102,7 @@ def read_item(
     return item
 
 
-@router.get("/{id}/reviews", response_model=list[schemas.ReviewResponse])
+@router.get("/{id}/reviews/", response_model=list[schemas.ReviewResponse])
 def read_item_reviews(
         *,
         db: Session = Depends(deps.get_db),
@@ -119,7 +119,7 @@ def read_item_reviews(
     return reviews
 
 
-@router.delete("/{id}", response_model=schemas.ItemResponse)
+# @router.delete("/{id}", response_model=schemas.ItemResponse)
 def delete_item(
         *,
         db: Session = Depends(deps.get_db),

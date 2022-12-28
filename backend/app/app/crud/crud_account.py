@@ -49,3 +49,6 @@ class CRUDUserAccount(CRUDBase[UserAccount, UserAccountCreate, UserAccountUpdate
         db.commit()
         db.refresh(user_account)
         return user_account
+
+
+account = CRUDUserAccount(UserAccount)

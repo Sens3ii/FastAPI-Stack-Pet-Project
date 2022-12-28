@@ -30,7 +30,8 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         crud.role.delete_roles_by_user_id(db=db, user_id=db_obj.id)
         role = crud.role.get_by_codename(db=db, codename=obj_in.role_code)
         crud.role.add_user(db=db, role_id=role.id, user_id=db_obj.id)
-        # TODO: add account and deposit creation
+        crud.account.generate_user_account(db=db, user_id=db_obj.id)
+        crud.deposit.generate_user_deposit(db=db, user_id=db_obj.id)
         return db_obj
 
     def update(
