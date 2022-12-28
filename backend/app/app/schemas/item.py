@@ -8,11 +8,13 @@ class ItemBase(BaseModel):
     title: str
     description: str
     price: int
+    image_url: Optional[str] = None
+    category_id: int
 
 
 # Properties to receive on item creation
 class ItemCreate(ItemBase):
-    pass
+    owner_id: int
 
 
 # Properties to receive on item update
@@ -32,6 +34,7 @@ class ItemResponse(ItemBase):
     id: int
     rating: Optional[float] = None
     owner: OwnerNested
+    bonus_percent: float
 
     class Config:
         orm_mode = True

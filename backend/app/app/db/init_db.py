@@ -8,58 +8,6 @@ from app.db import base  # noqa: F401
 # otherwise, SQL Alchemy might fail to initialize relationships properly
 # for more details: https://github.com/tiangolo/full-stack-fastapi-postgresql/issues/28
 
-items = [
-    {
-        "title": "Item 1",
-        "description": "This is the first item in the list",
-        "price": 10,
-    },
-    {
-        "title": "Item 2",
-        "description": "This is the second item in the list",
-        "price": 20
-    },
-    {
-        "title": "Item 3",
-        "description": "This is the third item in the list",
-        "price": 30
-    },
-    {
-        "title": "Item 4",
-        "description": "This is the fourth item in the list",
-        "price": 40
-    },
-    {
-        "title": "Item 5",
-        "description": "This is the fifth item in the list",
-        "price": 50
-    },
-    {
-        "title": "Item 6",
-        "description": "This is the sixth item in the list",
-        "price": 60
-    },
-    {
-        "title": "Item 7",
-        "description": "This is the seventh item in the list",
-        "price": 70
-    },
-    {
-        "title": "Item 8",
-        "description": "This is the eighth item in the list",
-        "price": 80
-    },
-    {
-        "title": "Item 9",
-        "description": "This is the ninth item in the list",
-        "price": 90
-    },
-    {
-        "title": "Item 10",
-        "description": "This is the tenth item in the list",
-        "price": 100
-    }
-]
 
 roles = [
     {"name": "Admin", "codename": "admin"},
@@ -116,14 +64,38 @@ users = [
 
 item_category = [
     {
-        'title': "Электроника",
+        'title': "Electronics",
     },
     {
-        'title': "Мебель",
+        'title': "Furniture",
     },
     {
-        'title': "Книги",
+        'title': "Books",
     },
+]
+
+items = [
+    {
+        "title": "iPhone 12",
+        "description": "iPhone 12",
+        "price": 100000,
+        "image_url": "https://www.apple.com/v/iphone-14/d/images/overview/selfies/selfie_startframe__ex2suisayck2_large.jpg",
+        "category_type": "Electronics",
+    },
+    {
+        "title": "Стул",
+        "description": "Стул",
+        "price": 10000,
+        "image_url": "https://i.imgur.com/1fqp78I_d.webp?maxwidth=520&shape=thumb&fidelity=high",
+        "category_type": "Furniture",
+    },
+    {
+        "title": "От нуля к единице. Как создать стартап, который изменит будущее",
+        "description": "Книга «От нуля к единице» посвящена технологиям создания успешного стартапа, ведущего к образованию мощного монопольного бизнеса. Понимая конкуренцию как разрушительную силу, Питер Тиль предлагает своему читателю убедиться в действенности монополистических бизнес-стратегий на примере опыта огромного количества компаний, среди которых Facebook, Microsoft, eBay, Twitter и многие другие. Кроме того, книга содержит рассуждения о том, что такое стартапное мышление, и рекомендации по формированию сплоченной рабочей команды.",
+        "price": 1000,
+        "image_url": "https://cdn.f.kz/prod/479/478181_1000.jpg",
+        "category_type": "Books",
+    }
 ]
 
 
@@ -139,13 +111,19 @@ def init_db(db: Session) -> None:
     for user in users:
         user_obj = crud.user.get_by_email(db, email=user["email"])
         if not user_obj:
-            user_obj = crud.user.create(db, obj_in=schemas.UserCreate(**user))
-        # Create items
-        if user["role_code"] in ['admin', 'seller']:
-            for item in items:
-                crud.item.create_with_owner(db, obj_in=schemas.ItemCreate(**item), owner_id=user_obj.id)
+            crud.user.create(db, obj_in=schemas.UserCreate(**user))
 
     for category in item_category:
         category_obj = crud.item_category.get_by_title(db, title=category["title"])
         if not category_obj:
             crud.item_category.create(db, obj_in=schemas.ItemCategoryCreate(**category))
+
+    for item in items:
+        item_obj = crud.item.get_by_title(db, title=item["title"])
+        if not item_obj:
+            category_id = crud.item_category.get_by_title(db, title=item["category_type"]).id
+            seller_id = crud.user.get_by_email(db, email="seller@jusan.com").id
+            del item["category_type"]
+            item["category_id"] = category_id
+            item["owner_id"] = seller_id
+            crud.item.create(db, obj_in=schemas.ItemCreate(**item))

@@ -1,30 +1,30 @@
-from typing import Any, List, Optional
+from typing import Any, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi_pagination import Page
 from sqlalchemy.orm import Session
 
 from app import crud, models, schemas
 from app.api import deps
+from app.api.filters import ItemFilterParams
 
 router = APIRouter()
 
 
-@router.get("/", response_model=List[schemas.ItemResponse])
+@router.get("/", response_model=Page[schemas.ItemResponse])
 def read_items(
         db: Session = Depends(deps.get_db),
-        skip: int = 0,
-        limit: int = 100,
         search: Optional[str] = None,
-        rating_above: Optional[float] = Query(None, ge=0, le=5),
-        rating_below: Optional[float] = Query(None, ge=0, le=5),
+        filter_in: ItemFilterParams = Depends(),
         current_user: models.User = Depends(deps.get_current_user),
 ) -> Any:
     """
     Retrieve items.
     """
-
-    items = crud.item.get_filtered_items(db, skip=skip, limit=limit, search=search, rating_above=rating_above,
-                                         rating_below=rating_below)
+    query = crud.item.get_multi_query(db)
+    query = crud.item.get_query_by_search_value(query=query, value=search, search_fields=['title'])
+    query = crud.item.get_filtered_query(query=query, filter_params=filter_in)
+    items = crud.item.get_paginated(query)
     return items
 
 
@@ -102,7 +102,7 @@ def read_item(
     return item
 
 
-@router.get("/{id}/reviews/", response_model=list[schemas.ReviewResponse])
+@router.get("/{id}/reviews/", response_model=Page[schemas.ReviewResponse])
 def read_item_reviews(
         *,
         db: Session = Depends(deps.get_db),
@@ -115,7 +115,8 @@ def read_item_reviews(
     item = crud.item.get(db=db, id=id)
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
-    reviews = crud.review.get_multi_by_item_id(db=db, item_id=id)
+    query = crud.review.get_multi_query_by_item_id(db=db, item_id=id)
+    reviews = crud.review.get_paginated(query)
     return reviews
 
 
